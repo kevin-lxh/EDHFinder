@@ -161,8 +161,8 @@ typedef NS_ENUM(NSUInteger, EDHFinderListViewControllerCreateType) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     EDHFinderItem *item = [self itemAtIndexPath:indexPath];
     
-    if ([self.listDelegate respondsToSelector:@selector(listViewController:canOpenFile:)]) {
-        if ([self.listDelegate listViewController:self canOpenFile:item] == NO) {
+    if ([self.listDelegate respondsToSelector:@selector(listViewController:canOpenItem:)]) {
+        if ([self.listDelegate listViewController:self canOpenItem:item] == NO) {
             return;
         }
     }
@@ -179,6 +179,11 @@ typedef NS_ENUM(NSUInteger, EDHFinderListViewControllerCreateType) {
             [self.listDelegate listViewController:self didSelectFile:item];
         }
     }
+}
+    
+- (void)openItem:(EDHFinderItem*)item {
+    EDHFinderListViewController *nextController = [[[self class] alloc] initWithPath:item.path delegate:self.listDelegate];
+    [self.navigationController pushViewController:nextController animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {

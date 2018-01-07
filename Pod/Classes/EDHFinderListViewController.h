@@ -18,6 +18,7 @@
 
 - (id)initWithPath:(NSString *)path delegate:(id<EDHFinderListViewControllerDelegate>)delegate;
 - (id)initWithItem:(EDHFinderItem *)item delegate:(id<EDHFinderListViewControllerDelegate>)delegate;
+- (void)openItem:(EDHFinderItem*)item;
 
 @end
 
@@ -26,7 +27,7 @@
 
 @optional
 
-- (BOOL)listViewController:(EDHFinderListViewController *)controller canOpenFile:(EDHFinderItem*)item;
+- (BOOL)listViewController:(EDHFinderListViewController *)controller canOpenItem:(EDHFinderItem*)item;
 - (void)listViewController:(EDHFinderListViewController *)controller didSelectFile:(EDHFinderItem *)item;
 - (void)listViewController:(EDHFinderListViewController *)controller didDestroyFile:(EDHFinderItem *)item;
 - (void)listViewController:(EDHFinderListViewController *)controller didMoveToDirectory:(EDHFinderItem *)item;
