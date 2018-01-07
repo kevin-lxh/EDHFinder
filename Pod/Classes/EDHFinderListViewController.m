@@ -160,10 +160,17 @@ typedef NS_ENUM(NSUInteger, EDHFinderListViewControllerCreateType) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     EDHFinderItem *item = [self itemAtIndexPath:indexPath];
+    
+    if ([self.listDelegate respondsToSelector:@selector(listViewController:canOpenFile:)]) {
+        if ([self.listDelegate listViewController:self canOpenFile:item] == NO) {
+            return;
+        }
+    }
 
     if (item.isDirectory) {
         EDHFinderListViewController *nextController = [[[self class] alloc] initWithPath:item.path delegate:self.listDelegate];
         [self.navigationController pushViewController:nextController animated:YES];
+        
         if ([self.listDelegate respondsToSelector:@selector(listViewController:didMoveToDirectory:)]) {
             [self.listDelegate listViewController:nextController didMoveToDirectory:item];
         }

@@ -26,6 +26,7 @@
 
 @optional
 
+- (BOOL)listViewController:(EDHFinderListViewController *)controller canOpenFile:(EDHFinderItem*)item;
 - (void)listViewController:(EDHFinderListViewController *)controller didSelectFile:(EDHFinderItem *)item;
 - (void)listViewController:(EDHFinderListViewController *)controller didDestroyFile:(EDHFinderItem *)item;
 - (void)listViewController:(EDHFinderListViewController *)controller didMoveToDirectory:(EDHFinderItem *)item;
